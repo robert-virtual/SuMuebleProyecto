@@ -1,4 +1,5 @@
-﻿using SuMueble.Models;
+﻿using SuMueble.Helpers;
+using SuMueble.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace SuMueble.DataAccess
 {
-    public class SuMuebleBDInitializer: DropCreateDatabaseIfModelChanges<SuMuebleDBContext>//
+    public class SuMuebleDBInitializer: DropCreateDatabaseIfModelChanges<SuMuebleDBContext>//
     {
 
         protected override void Seed(SuMuebleDBContext context)
@@ -34,7 +35,7 @@ namespace SuMueble.DataAccess
             var defaultColaborador = new Colaborador()
             {
                 DNI = "0703200101235",
-                Clave = "admin678",
+                Clave = Credentials.Encrypt("admin678"),
                 Nombre = "Administrador",
                 Puesto = new Puesto() { Nombre = "Gerente" }
             }; 

@@ -61,7 +61,7 @@ namespace SuMueble.Views.Prompts
                     Cantidad = 1,
                     PrecioVenta = txt_precio.Value - descue,
                     Descuento = descue,
-                    Producto = productos.Find( p => p.Id == GetCell(0))
+                    Producto = productos.Find( p => p.ProductoId == GetCell(0))
                 };
 
                 // propiedad estatica de VentaCreditoView
@@ -78,7 +78,7 @@ namespace SuMueble.Views.Prompts
 
             List<Producto> filtrados = productos.Where<Producto>(x => {
 
-                return x.Nombre.ToLower().StartsWith(buscar) || x.Id.ToString().StartsWith(buscar);
+                return x.Nombre.ToLower().StartsWith(buscar) || x.ProductoId.ToString().StartsWith(buscar);
 
 
             }).ToList();

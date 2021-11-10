@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -8,7 +9,8 @@ namespace SuMueble.Models
     [Table("Pagos")]
     public class Pago
     {
-        public int Id { get; set; }
+        [Key] // espesifica la llave primaria en al tabla
+        public int PagoId { get; set; }
 
         [ForeignKey("Colaborador")]
         public string ColaboradorDNI { get; set; }

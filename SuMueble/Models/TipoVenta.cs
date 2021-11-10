@@ -9,7 +9,8 @@ namespace SuMueble.Models
     [Table("TiposVenta")]
     public class TipoVenta
     {
-        public int Id { get; set; }
+        [Key]
+        public int TipoVentaId { get; set; }
 
         [Required,MaxLength(25)]
         public string Nombre { get; set; }

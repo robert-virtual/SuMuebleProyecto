@@ -212,7 +212,7 @@ namespace SuMueble.Views
                             ProductoId = prodSelected,
                             Cantidad = (int)txt_cantidadProducto.Value,
                             PrecioVenta = txt_precio.Value - (descuento) ,
-                            Producto = productos.Find( x => x.Id == prodSelected),
+                            Producto = productos.Find( x => x.ProductoId == prodSelected),
                             Descuento = descuento,
 
                         };
@@ -446,7 +446,7 @@ namespace SuMueble.Views
 
                 try
                 {
-                    return x.Nombre.ToLower().StartsWith(buscar) || x.Id.ToString().StartsWith(buscar);
+                    return x.Nombre.ToLower().StartsWith(buscar) || x.ProductoId.ToString().StartsWith(buscar);
                 }
                 catch
                 {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -16,42 +17,56 @@ namespace SuMueble.Views
         public Login()
         {
             InitializeComponent();
+            
         }
 
         private void btn_entrar_Click(object sender, EventArgs e)
         {
+            var res = SeedData.CheckDefaultColaborador();
+            Text = res ? "dynamic title" : "res es false";
             string user = txt_user.Text;
             string password = txt_password.Text;
             var colaborador = new Colaborador();
-            using (var db = new SuMuebleDBContext())
-            {
-                colaborador = db.Colaboradores.Find(user);
-            }
-            if (colaborador != null)
-            {
-
-                if (colaborador.Activo)
+                using (var db = new SuMuebleDBContext())
                 {
-                    if (colaborador.Clave == password)
+                    try
                     {
-                        Menu menu = new Menu(colaborador);
-                        menu.Show();
-                        this.Hide();
+                        colaborador = db.Colaboradores.Find(user);
+                    }
+                    catch (DbEntityValidationException err)
+                    {
+
+                        VentaCreditoView.showValidationError(err);
+                    }
+                }
+
+            if (colaborador != null)
+                {
+
+                    if (colaborador.Activo)
+                    {
+                        if (colaborador.Clave == password)
+                        {
+                            Menu menu = new Menu(colaborador);
+                            menu.Show();
+                            this.Hide();
+
+                        }
 
                     }
-                  
+                    else
+                    {
+                        MessageBox.Show("Colaborador inhabilitado", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
                 }
-                else {
-                    MessageBox.Show("Colaborador inhabilitado", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                   
-                }
-            }
-            else
-                MessageBox.Show("Codigo o Clave de Usuario Invalido", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                    MessageBox.Show("Codigo o Clave de Usuario Invalido", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                txt_user.Text = "";
+                txt_password.Text = "";
+                txt_user.Focus();
             
-            txt_user.Text = "";
-            txt_password.Text = "";
-            txt_user.Focus();
 
         }
 
@@ -63,16 +78,6 @@ namespace SuMueble.Views
             }
             else {
                 txt_password.PasswordChar = '●';
-            }
-        }
-
-        private void txt_user_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
-            {
-                MessageBox.Show("Introduzca números", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-                return;
             }
         }
     }

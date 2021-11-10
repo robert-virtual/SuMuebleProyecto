@@ -20,7 +20,7 @@
                 "dbo.Productos",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        ProductoId = c.Int(nullable: false, identity: true),
                         Nombre = c.String(nullable: false, maxLength: 50),
                         Descripcion = c.String(maxLength: 255),
                         Precio = c.Decimal(nullable: false, precision: 18, scale: 2),
@@ -28,7 +28,7 @@
                         Impuesto = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CategoriaId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.ProductoId)
                 .ForeignKey("dbo.Categorias", t => t.CategoriaId, cascadeDelete: true)
                 .Index(t => t.CategoriaId);
             
@@ -76,7 +76,7 @@
                         Direccion = c.String(maxLength: 200),
                         Email = c.String(maxLength: 320),
                         Telefono = c.String(maxLength: 8),
-                        Clave = c.String(maxLength: 255),
+                        Clave = c.String(maxLength: 433),
                         PuestoId = c.Int(nullable: false),
                         FechaNacimiento = c.DateTime(nullable: false),
                         FechaContratado = c.DateTime(nullable: false),
@@ -91,13 +91,13 @@
                 "dbo.Pagos",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        PagoId = c.Int(nullable: false, identity: true),
                         ColaboradorDNI = c.String(maxLength: 13),
                         CodigoFactura = c.Int(nullable: false),
                         Monto = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Fecha = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.PagoId)
                 .ForeignKey("dbo.Colaboradores", t => t.ColaboradorDNI)
                 .ForeignKey("dbo.Ventas", t => t.CodigoFactura, cascadeDelete: true)
                 .Index(t => t.ColaboradorDNI)
@@ -149,10 +149,10 @@
                 "dbo.TiposVenta",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        TipoVentaId = c.Int(nullable: false, identity: true),
                         Nombre = c.String(nullable: false, maxLength: 25),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.TipoVentaId);
             
             CreateTable(
                 "dbo.Devoluciones",

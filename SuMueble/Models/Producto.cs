@@ -9,7 +9,8 @@ namespace SuMueble.Models
     [Table("Productos")]
     public class Producto
     {
-        public int Id { get; set; }
+        [Key]
+        public int ProductoId { get; set; }
 
         [Required,MaxLength(50)]
         public string Nombre { get; set; }

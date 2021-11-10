@@ -31,7 +31,7 @@ namespace SuMueble.Models
         [MinLength(8), MaxLength(8)]
         public string Telefono { get; set; }
 
-        [MinLength(8), MaxLength(255)]
+        [MinLength(433), MaxLength(433)]
         public string Clave { get; set; }
 
         public int PuestoId { get; set; }

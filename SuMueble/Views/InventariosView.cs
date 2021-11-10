@@ -74,7 +74,7 @@ namespace Ventana_de_Inventarios
 
             List<Producto> filtrados = productos.Where<Producto>(x => {
 
-                return x.Nombre.ToLower().StartsWith(buscar) || x.Id.ToString().StartsWith(buscar) ;
+                return x.Nombre.ToLower().StartsWith(buscar) || x.ProductoId.ToString().StartsWith(buscar) ;
 
 
             }).ToList();

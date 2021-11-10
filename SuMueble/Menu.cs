@@ -181,5 +181,16 @@ namespace SuMueble.Views
             VentaCreditoView ventaCreditoView = new VentaCreditoView();
             contenedor.Controls.Add(ventaCreditoView);
         }
+
+        private void btn_clientes_Click(object sender, EventArgs e)
+        {
+            HideAll();
+
+            btn_clientes.ForeColor = Color.White; // color blanco texto boton
+            btn_clientes.BackColor = Color.DodgerBlue; // color azul de boton seleccionado
+            contenedor.Controls.Clear();
+            var clientesView = new ClientesView();
+            contenedor.Controls.Add(clientesView);
+        }
     }
 }

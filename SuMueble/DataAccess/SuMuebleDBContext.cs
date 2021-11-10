@@ -11,7 +11,8 @@ namespace SuMueble.DataAccess
 
         public SuMuebleDBContext():base("SuMuebleBD")
         {
-            Database.SetInitializer(new SuMuebleBDInitializer());
+            Database.SetInitializer(new SuMuebleDBInitializer());
+            
         }
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetallesVenta { get; set; }
